@@ -1,0 +1,50 @@
+ @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Detail Data'),
+        backgroundColor: Colors.grey[800],
+      ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.grey[300],
+            padding: EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('Timestamp', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Suhu', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Kelembapan', style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('Gas', style: TextStyle(fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: sensorData.length,
+              itemBuilder: (context, index) {
+                final item = sensorData[index];
+                final timestamp = item['timestamp']; // Get timestamp
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  color: Colors.grey[200], // Light grey background for each row
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(child: Text(timestamp, textAlign: TextAlign.center)),
+                      Expanded(child: Text('${item['temperature']}', textAlign: TextAlign.center)),
+                      Expanded(child: Text('${item['humidity']}', textAlign: TextAlign.center)),
+                      Expanded(child: Text('${item['gas']}', textAlign: TextAlign.center)),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
